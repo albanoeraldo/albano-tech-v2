@@ -1,0 +1,14 @@
+# Local development / generated caches
+.DS_Store
+Thumbs.db
+node_modules/
+__pycache__/
+*.log
+# Never publish secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Private editor/session files
+.idea/
