@@ -354,9 +354,30 @@
     });
   }
 
+  function setupHeroSlideshow() {
+    const slides = $$('.hero-slide');
+    if (slides.length <= 1) return;
+
+    let currentSlide = slides.findIndex((slide) => slide.classList.contains('is-active'));
+    if (currentSlide < 0) {
+      currentSlide = 0;
+      slides[0].classList.add('is-active');
+    }
+
+    window.setInterval(() => {
+      // Respeita a preferência de movimento reduzido e evita trabalho em aba oculta.
+      if (reducedMotion || document.hidden) return;
+
+      slides[currentSlide].classList.remove('is-active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('is-active');
+    }, 6000);
+  }
+
   // Modules remain isolated: one optional enhancement failing does not stop links.
-  [setupContactLinks, setupNavigation, setupMotion, setupReveals,
-    setupScrollEffects, setupDialogs, setupProjects, setupFaq, setupQuoteForm]
+  [setupContactLinks, setupNavigation, setupMotion, setupHeroSlideshow,
+  setupReveals, setupScrollEffects, setupDialogs, setupProjects,
+  setupFaq, setupQuoteForm]
     .forEach((setup) => {
       try { setup(); } catch (error) { console.error(`Albano Tech: ${setup.name}`, error); }
     });
