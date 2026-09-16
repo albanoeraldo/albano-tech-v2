@@ -92,9 +92,6 @@
 
   function setupMotion() {
     const button = $('#motionToggle');
-    const pauseButton = $('#marqueePause');
-    const marquee = $('.marquee');
-    let stripPaused = false;
 
     function updateMotion() {
       reducedMotion = motionQuery.matches || manuallyReduced;
@@ -106,25 +103,17 @@
           ? 'Movimentos reduzidos (sistema)'
           : reducedMotion ? 'Ativar movimentos' : 'Reduzir movimentos';
       }
-      if (pauseButton) {
-        pauseButton.disabled = reducedMotion;
-        pauseButton.setAttribute('aria-pressed', String(reducedMotion || stripPaused));
-        pauseButton.setAttribute('aria-label', reducedMotion
-          ? 'Faixa pausada: movimentos reduzidos'
-          : stripPaused ? 'Retomar faixa em movimento' : 'Pausar faixa em movimento');
-      }
       if (reducedMotion) {
         revealObserver?.disconnect();
         $$('[data-reveal]').forEach((element) => element.classList.add('is-visible'));
       }
     }
-    button?.addEventListener('click', () => { manuallyReduced = !manuallyReduced; updateMotion(); });
-    motionQuery.addEventListener('change', updateMotion);
-    pauseButton?.addEventListener('click', () => {
-      stripPaused = !stripPaused;
-      marquee?.classList.toggle('is-paused', stripPaused);
+
+    button?.addEventListener('click', () => {
+      manuallyReduced = !manuallyReduced;
       updateMotion();
     });
+    motionQuery.addEventListener('change', updateMotion);
     updateMotion();
   }
 
@@ -197,6 +186,310 @@
     }
   }
 
+function setupProcessAnimations() {
+  const gsap = window.gsap;
+  const ScrollTrigger = window.ScrollTrigger;
+
+  if (!gsap || !ScrollTrigger) {
+    console.warn('Albano Tech: GSAP/ScrollTrigger não carregado.');
+    return;
+  }
+
+  const timeline = $('#timeline');
+  const steps = $$('.timeline-step[data-step]');
+
+  if (!timeline || !steps.length || reducedMotion) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const media = gsap.matchMedia();
+
+
+  // ========================================================
+  // DESKTOP / TABLET
+  // ========================================================
+
+  media.add('(min-width: 721px)', () => {
+
+    steps.forEach((step, index) => {
+      const card = $('.timeline-content', step);
+      const number = $('.timeline-number', step);
+      const aside = $('.timeline-aside', step);
+      const icon = $('.timeline-card-icon', step);
+
+      if (!card) return;
+
+      // Cards alternam a direção de entrada.
+      const direction = index % 2 === 0 ? -55 : 55;
+
+      const animation = gsap.timeline({
+        scrollTrigger: {
+          trigger: step,
+
+          // Começa quando o card entra na parte inferior da tela.
+          start: 'top 82%',
+
+          // Executa apenas na primeira passagem.
+          once: true
+        }
+      });
+
+
+      // CARD
+      animation.fromTo(
+        card,
+        {
+          autoAlpha: 0,
+          x: direction,
+          y: 20,
+          scale: 0.975
+        },
+        {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+
+          duration: 0.9,
+          ease: 'power3.out',
+
+          clearProps: 'transform,opacity,visibility'
+        }
+      );
+
+
+      // NÚMERO DA TIMELINE
+      if (number) {
+        animation.fromTo(
+          number,
+          {
+            autoAlpha: 0,
+            scale: 0.55
+          },
+          {
+            autoAlpha: 1,
+            scale: 1,
+
+            duration: 0.5,
+            ease: 'back.out(1.8)',
+
+            clearProps: 'transform,opacity,visibility'
+          },
+
+          '-=0.67'
+        );
+      }
+
+
+      // ÍCONE DO CARD
+      if (icon) {
+        animation.fromTo(
+          icon,
+          {
+            autoAlpha: 0,
+            scale: 0.7,
+            rotate: -8
+          },
+          {
+            autoAlpha: 1,
+            scale: 1,
+            rotate: 0,
+
+            duration: 0.55,
+            ease: 'back.out(1.6)',
+
+            clearProps: 'transform,opacity,visibility'
+          },
+
+          '-=0.48'
+        );
+      }
+
+
+      // PALAVRA LATERAL
+      if (aside) {
+        animation.fromTo(
+          aside,
+          {
+            autoAlpha: 0,
+            y: 22
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+
+            duration: 0.65,
+            ease: 'power2.out',
+
+            clearProps: 'transform,opacity,visibility'
+          },
+
+          '-=0.48'
+        );
+      }
+    });
+
+  });
+
+
+  // ========================================================
+  // MOBILE
+  // ========================================================
+
+  media.add('(max-width: 720px)', () => {
+
+    steps.forEach((step) => {
+      const card = $('.timeline-content', step);
+      const number = $('.timeline-number', step);
+      const icon = $('.timeline-card-icon', step);
+
+      if (!card) return;
+
+      const animation = gsap.timeline({
+        scrollTrigger: {
+          trigger: step,
+          start: 'top 86%',
+          once: true
+        }
+      });
+
+
+      // No celular não vem das laterais.
+      // Isso evita aquele efeito de layout "escorregando".
+      animation.fromTo(
+        card,
+        {
+          autoAlpha: 0,
+          y: 32,
+          scale: 0.985
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+
+          duration: 0.78,
+          ease: 'power3.out',
+
+          clearProps: 'transform,opacity,visibility'
+        }
+      );
+
+
+      if (number) {
+        animation.fromTo(
+          number,
+          {
+            autoAlpha: 0,
+            scale: 0.6
+          },
+          {
+            autoAlpha: 1,
+            scale: 1,
+
+            duration: 0.45,
+            ease: 'back.out(1.7)',
+
+            clearProps: 'transform,opacity,visibility'
+          },
+
+          '-=0.55'
+        );
+      }
+
+
+      if (icon) {
+        animation.fromTo(
+          icon,
+          {
+            autoAlpha: 0,
+            scale: 0.75
+          },
+          {
+            autoAlpha: 1,
+            scale: 1,
+
+            duration: 0.45,
+            ease: 'back.out(1.5)',
+
+            clearProps: 'transform,opacity,visibility'
+          },
+
+          '-=0.4'
+        );
+      }
+    });
+
+  });
+
+
+  // Recalcula posições depois que tudo estiver carregado.
+  window.addEventListener(
+    'load',
+    () => ScrollTrigger.refresh(),
+    { once: true }
+  );
+}
+
+
+
+  function setupTestimonials() {
+    const container = $('.testimonials-swiper');
+
+    if (!container) return;
+
+    if (!window.Swiper) {
+      console.warn('Albano Tech: Swiper não carregado.');
+      return;
+    }
+
+    new window.Swiper(container, {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: true,
+      speed: reducedMotion ? 0 : 700,
+      effect: reducedMotion ? 'slide' : 'creative',
+
+      creativeEffect: {
+        limitProgress: 2,
+        prev: {
+          translate: ['-7%', 0, -1],
+          scale: 0.97,
+          opacity: 0
+        },
+        next: {
+          translate: ['7%', 0, -1],
+          scale: 0.97,
+          opacity: 0
+        }
+      },
+
+      grabCursor: !reducedMotion,
+
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true
+      },
+
+      navigation: {
+        prevEl: '.testimonial-prev',
+        nextEl: '.testimonial-next'
+      },
+
+      pagination: {
+        el: '.testimonial-pagination',
+        clickable: true
+      },
+
+      a11y: {
+        enabled: true,
+        prevSlideMessage: 'Mostrar depoimento anterior',
+        nextSlideMessage: 'Mostrar próximo depoimento',
+        paginationBulletMessage: 'Ir para o depoimento {{index}}'
+      }
+    });
+  }
+
   const dialogFocus = new WeakMap();
   function openDialog(dialog) {
     if (!dialog || typeof dialog.showModal !== 'function') return false;
@@ -251,7 +544,6 @@
 
   function setupProjects() {
     const filters = $('#projectFilters');
-    const count = $('#projectCount');
     const cards = $$('.project-card');
     if (filters) {
       filters.hidden = false;
@@ -261,13 +553,11 @@
           candidate.classList.toggle('is-active', active);
           candidate.setAttribute('aria-pressed', String(active));
         });
-        let visible = 0;
         cards.forEach((card) => {
           const show = button.dataset.filter === 'all' || button.dataset.filter === card.dataset.category;
           card.hidden = !show;
-          if (show) { visible++; card.classList.add('is-visible'); }
+          if (show) card.classList.add('is-visible');
         });
-        if (count) count.textContent = `${visible} ${visible === 1 ? 'projeto ou conceito' : 'projetos e conceitos'}`;
         window.dispatchEvent(new Event('resize'));
       }));
     }
@@ -321,7 +611,6 @@
     const select = $('#serviceSelect');
     const name = $('#customerName');
     const count = $('#briefCount');
-    const status = $('#formStatus');
     if (!form || !brief || !select || !name) return;
     form.hidden = false;
     $('#contactFallback').hidden = true;
@@ -329,7 +618,6 @@
     brief.addEventListener('input', () => {
       brief.setCustomValidity('');
       if (count) count.textContent = `${brief.value.length}/600`;
-      status.hidden = true;
     });
     form.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -345,8 +633,6 @@
       if (name.value.trim()) lines.push(`Meu nome: ${name.value.trim()}`);
       lines.push(`Servi\u00e7o: ${serviceLabel}`, '', 'O que preciso:', description);
       const url = whatsappUrl(lines.join('\n'));
-      $('#manualWhatsapp').href = url;
-      status.hidden = false;
       // Called synchronously from the user's action. No requests to a backend.
       // No confirmation of sending: the visitor must review and send in WhatsApp.
       // A normal fallback link stays visible if the browser blocks the new tab.
@@ -375,9 +661,22 @@
   }
 
   // Modules remain isolated: one optional enhancement failing does not stop links.
-  [setupContactLinks, setupNavigation, setupMotion, setupHeroSlideshow,
-  setupReveals, setupScrollEffects, setupDialogs, setupProjects,
-  setupFaq, setupQuoteForm]
+  [
+  setupContactLinks,
+  setupNavigation,
+  setupMotion,
+  setupHeroSlideshow,
+  setupReveals,
+  setupScrollEffects,
+
+  setupProcessAnimations,
+  setupTestimonials,
+
+  setupDialogs,
+  setupProjects,
+  setupFaq,
+  setupQuoteForm
+]
     .forEach((setup) => {
       try { setup(); } catch (error) { console.error(`Albano Tech: ${setup.name}`, error); }
     });

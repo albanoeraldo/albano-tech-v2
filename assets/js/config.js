@@ -20,50 +20,128 @@ window.ALBANO_CONFIG = Object.freeze({
     upgrades: 'Ol\u00e1, Eraldo! Vim pelo site da Albano Tech e preciso de ajuda com um upgrade ou problema no meu computador.'
   },
   projects: {
-    albano: {
-      title: 'Albano Tech',
-      tag: 'PROJETO PR\u00d3PRIO / LANDING PAGE',
-      image: 'assets/img/site-preview.svg',
-      imageAlt: 'Representa\u00e7\u00e3o visual da landing page da Albano Tech, n\u00e3o uma captura de tela.',
-      description: 'Uma p\u00e1gina para apresentar os servi\u00e7os da marca e facilitar o primeiro contato.',
-      service: 'sites',
-      url: 'https://albanoeraldo.github.io/albano-tech/',
-      sections: [
-        ['O problema', 'Apresentar os servi\u00e7os de assist\u00eancia t\u00e9cnica em um \u00fanico lugar e direcionar interessados para uma conversa.'],
-        ['A solu\u00e7\u00e3o', 'Landing page com servi\u00e7os, explica\u00e7\u00e3o do atendimento, perguntas frequentes e links diretos para o WhatsApp.'],
-        ['O que foi usado', 'HTML, CSS e JavaScript, com publica\u00e7\u00e3o est\u00e1tica no GitHub Pages.'],
-        ['Sobre o visual', 'A imagem desta apresenta\u00e7\u00e3o \u00e9 uma representa\u00e7\u00e3o ilustrada. O link abaixo abre a vers\u00e3o que estiver publicada. N\u00e3o foram inclu\u00eddas m\u00e9tricas de resultado sem comprova\u00e7\u00e3o.']
+
+  albano: {
+    title: 'Doce da Lu',
+
+    tag: 'LANDING PAGE · PAINEL ADMINISTRATIVO · AUTOMAÇÃO',
+
+    description:
+      'Uma solução criada para levar a Doce da Lu para o digital e, ao mesmo tempo, facilitar a rotina de quem administra o negócio.',
+
+    image: 'assets/img/projects/doce-da-lu.png',
+
+    imageAlt:
+      'Landing page desenvolvida para a Doce da Lu',
+
+    service: 'sites',
+
+    url: '',
+
+    sections: [
+      [
+        'O desafio',
+        'A Doce da Lu precisava de uma presença digital para apresentar seus produtos e facilitar o contato com os clientes, mas o projeto também precisava ajudar na organização do negócio.'
+      ],
+
+      [
+        'A solução',
+        'Foi criada uma landing page personalizada para apresentar a marca, os produtos e direcionar os pedidos de forma simples e acessível.'
+      ],
+
+      [
+        'Além do site',
+        'O projeto também recebeu uma área administrativa para centralizar informações importantes da rotina, permitindo acompanhar produtos, vendas e gastos sem depender apenas de controles espalhados.'
+      ],
+
+      [
+        'Automação na rotina',
+        'A proposta foi reduzir tarefas manuais e transformar informações dos pedidos e da operação em dados mais organizados para facilitar o acompanhamento do negócio.'
       ]
-    },
-    dashboard: {
-      title: 'Tudo no mesmo lugar',
-      tag: 'CONCEITO DEMONSTRATIVO / N\u00c3O \u00c9 UMA ENTREGA A CLIENTE',
-      image: 'assets/img/dashboard.svg',
-      imageAlt: 'Interface demonstrativa de painel, com dados fict\u00edcios.',
-      description: 'Um exemplo visual de como um sistema pode ajudar a centralizar o acompanhamento de solicita\u00e7\u00f5es.',
-      service: 'systems',
-      url: null,
-      sections: [
-        ['Cen\u00e1rio ilustrativo', 'Informa\u00e7\u00f5es espalhadas em diferentes controles podem dificultar a consulta e o acompanhamento do trabalho.'],
-        ['Possibilidade de solu\u00e7\u00e3o', 'Uma interface central com solicita\u00e7\u00f5es, etapas e uma vis\u00e3o geral. As funcionalidades reais dependeriam do processo do cliente.'],
-        ['Importante', 'Este \u00e9 apenas um conceito visual. Os n\u00fameros s\u00e3o fict\u00edcios, n\u00e3o existe um backend conectado e n\u00e3o se trata de um trabalho entregue a um cliente.'],
-        ['Pr\u00f3ximo passo', 'Entender a necessidade antes de definir telas, permiss\u00f5es, dados, tecnologias e investimento.']
+    ]
+  },
+
+
+  dashboard: {
+    title: 'Prumo',
+
+    tag: 'APP FINANCEIRO · PROJETO EM DESENVOLVIMENTO',
+
+    description:
+      'Um aplicativo pensado para transformar a organização financeira em uma rotina mais simples, visual e fácil de acompanhar.',
+
+    image: 'assets/img/projects/prumo.png',
+
+    imageAlt:
+      'Apresentação do aplicativo financeiro Prumo',
+
+    service: 'systems',
+
+    url: '',
+
+    sections: [
+      [
+        'A proposta',
+        'O Prumo nasceu com a ideia de reunir as principais informações financeiras do dia a dia em um único aplicativo, evitando controles espalhados e facilitando a leitura do mês.'
+      ],
+
+      [
+        'Visão financeira',
+        'O usuário consegue acompanhar saldo previsto, entradas, despesas e indicadores que ajudam a entender para onde o dinheiro está indo.'
+      ],
+
+      [
+        'Organização do dia a dia',
+        'O projeto inclui recursos para lançamentos, contas, parcelas e cartões, mantendo compromissos financeiros organizados por período.'
+      ],
+
+      [
+        'Decisões mais conscientes',
+        'Recursos de simulação e acompanhamento ajudam a visualizar o impacto de novas compras e compromissos antes de tomar uma decisão.'
       ]
-    },
-    automation: {
-      title: 'Sua rotina, conectada',
-      tag: 'CONCEITO DEMONSTRATIVO / FLUXO ILUSTRATIVO',
-      image: 'assets/img/automation.svg',
-      imageAlt: 'Fluxo ilustrativo de recebimento, organiza\u00e7\u00e3o e registro de informa\u00e7\u00f5es.',
-      description: 'Um exemplo de caminho para reduzir a repeti\u00e7\u00e3o de tarefas entre ferramentas.',
-      service: 'automation',
-      url: null,
-      sections: [
-        ['Cen\u00e1rio ilustrativo', 'Copiar manualmente dados de uma entrada para outra ferramenta, repetindo as mesmas etapas a cada solicita\u00e7\u00e3o.'],
-        ['Possibilidade de solu\u00e7\u00e3o', 'Receber os dados, conferir as informa\u00e7\u00f5es necess\u00e1rias e registr\u00e1-los no destino adequado.'],
-        ['Cuidados necess\u00e1rios', 'Verificar permiss\u00f5es, integra\u00e7\u00f5es dispon\u00edveis, privacidade, tratamento de falhas e valida\u00e7\u00e3o do resultado.'],
-        ['Importante', 'O desenho \u00e9 demonstrativo. N\u00e3o h\u00e1 uma automa\u00e7\u00e3o sendo executada por esta p\u00e1gina, nem ganhos ou entregas a clientes sendo alegados.']
+    ]
+  },
+
+
+  automation: {
+    title: 'Menos manual. Mais fluxo.',
+
+    tag: 'AUTOMAÇÃO DE PROCESSOS · EXEMPLO DE SOLUÇÃO',
+
+    description:
+      'Uma visão de como tarefas repetitivas podem ser transformadas em fluxos conectados, reduzindo trabalho manual e deixando mais tempo para o que realmente importa.',
+
+    image: 'assets/img/projects/automacao-processos.png',
+
+    imageAlt:
+      'Fluxo ilustrativo de automação de processos',
+
+    service: 'automation',
+
+    url: '',
+
+    sections: [
+      [
+        'Entender a rotina',
+        'Antes de automatizar, o primeiro passo é entender como o processo funciona hoje, quais informações entram, quais decisões são necessárias e onde existe trabalho repetitivo.'
+      ],
+
+      [
+        'Conectar ferramentas',
+        'Formulários, planilhas, APIs, bancos de dados, sistemas, e-mails, WhatsApp e outras ferramentas podem fazer parte de um mesmo fluxo quando as integrações disponíveis permitem.'
+      ],
+
+      [
+        'Automatizar etapas',
+        'Validação de informações, registros, atualizações, organização de dados e notificações são exemplos de etapas que podem deixar de depender de execução manual.'
+      ],
+
+      [
+        'O objetivo',
+        'Automação não é automatizar tudo. É identificar tarefas que consomem tempo sem precisar de decisão humana e deixar o processo mais rápido, organizado e confiável.'
       ]
-    }
+    ]
   }
+
+}
 });
