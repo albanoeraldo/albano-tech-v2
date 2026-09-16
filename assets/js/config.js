@@ -29,7 +29,9 @@ window.ALBANO_CONFIG = Object.freeze({
     description:
       'Uma solução criada para levar a Doce da Lu para o digital e, ao mesmo tempo, facilitar a rotina de quem administra o negócio.',
 
-    image: 'assets/img/projects/doce-da-lu.png',
+    image: 'assets/img/projects/doce-da-lu.webp',
+    imageWidth: 1544,
+    imageHeight: 876,
 
     imageAlt:
       'Landing page desenvolvida para a Doce da Lu',
@@ -70,7 +72,9 @@ window.ALBANO_CONFIG = Object.freeze({
     description:
       'Um aplicativo pensado para transformar a organização financeira em uma rotina mais simples, visual e fácil de acompanhar.',
 
-    image: 'assets/img/projects/prumo.png',
+    image: 'assets/img/projects/prumo.webp',
+    imageWidth: 1600,
+    imageHeight: 1195,
 
     imageAlt:
       'Apresentação do aplicativo financeiro Prumo',
@@ -111,7 +115,9 @@ window.ALBANO_CONFIG = Object.freeze({
     description:
       'Uma visão de como tarefas repetitivas podem ser transformadas em fluxos conectados, reduzindo trabalho manual e deixando mais tempo para o que realmente importa.',
 
-    image: 'assets/img/projects/automacao-processos.png',
+    image: 'assets/img/projects/automacao-processos.webp',
+    imageWidth: 1600,
+    imageHeight: 1195,
 
     imageAlt:
       'Fluxo ilustrativo de automação de processos',

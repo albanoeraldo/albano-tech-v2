@@ -1,0 +1,272 @@
+[
+  {
+    "original": "assets/img/hero/hero-notebook.jpg",
+    "bytes_before": 3373935,
+    "original_size": [
+      6000,
+      3375
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/hero/hero-notebook-mobile.webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 68542
+      },
+      {
+        "path": "assets/img/hero/hero-notebook.webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 136044
+      }
+    ]
+  },
+  {
+    "original": "assets/img/hero/hero-pc.jpg",
+    "bytes_before": 2165698,
+    "original_size": [
+      5400,
+      3600
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/hero/hero-pc-mobile.webp",
+        "width": 1280,
+        "height": 853,
+        "bytes": 78314
+      },
+      {
+        "path": "assets/img/hero/hero-pc.webp",
+        "width": 1920,
+        "height": 1280,
+        "bytes": 138106
+      }
+    ]
+  },
+  {
+    "original": "assets/img/hero/hero-programacao.jpg",
+    "bytes_before": 650129,
+    "original_size": [
+      3000,
+      1688
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/hero/hero-programacao-mobile.webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 62632
+      },
+      {
+        "path": "assets/img/hero/hero-programacao.webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 112608
+      }
+    ]
+  },
+  {
+    "original": "assets/img/hero/hero-suporte.jpg",
+    "bytes_before": 2414364,
+    "original_size": [
+      5081,
+      3387
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/hero/hero-suporte-mobile.webp",
+        "width": 1280,
+        "height": 853,
+        "bytes": 66230
+      },
+      {
+        "path": "assets/img/hero/hero-suporte.webp",
+        "width": 1920,
+        "height": 1280,
+        "bytes": 110656
+      }
+    ]
+  },
+  {
+    "original": "assets/img/services/assistencia-tecnica.jpg",
+    "bytes_before": 2906907,
+    "original_size": [
+      4000,
+      4000
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/services/assistencia-tecnica-small.webp",
+        "width": 640,
+        "height": 640,
+        "bytes": 45112
+      },
+      {
+        "path": "assets/img/services/assistencia-tecnica.webp",
+        "width": 1200,
+        "height": 1200,
+        "bytes": 107174
+      }
+    ]
+  },
+  {
+    "original": "assets/img/services/solucoes-digitais.jpg",
+    "bytes_before": 1243375,
+    "original_size": [
+      2984,
+      3126
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/services/solucoes-digitais-small.webp",
+        "width": 640,
+        "height": 670,
+        "bytes": 62642
+      },
+      {
+        "path": "assets/img/services/solucoes-digitais.webp",
+        "width": 1200,
+        "height": 1257,
+        "bytes": 162090
+      }
+    ]
+  },
+  {
+    "original": "assets/img/projects/automacao-processos.png",
+    "bytes_before": 4422869,
+    "original_size": [
+      2400,
+      1792
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/projects/automacao-processos-card.webp",
+        "width": 800,
+        "height": 597,
+        "bytes": 64654
+      },
+      {
+        "path": "assets/img/projects/automacao-processos.webp",
+        "width": 1600,
+        "height": 1195,
+        "bytes": 153966
+      }
+    ]
+  },
+  {
+    "original": "assets/img/projects/doce-da-lu.png",
+    "bytes_before": 1164330,
+    "original_size": [
+      1544,
+      876
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/projects/doce-da-lu-card.webp",
+        "width": 800,
+        "height": 454,
+        "bytes": 41332
+      },
+      {
+        "path": "assets/img/projects/doce-da-lu.webp",
+        "width": 1544,
+        "height": 876,
+        "bytes": 104758
+      }
+    ]
+  },
+  {
+    "original": "assets/img/projects/prumo.png",
+    "bytes_before": 5394674,
+    "original_size": [
+      2400,
+      1792
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/projects/prumo-card.webp",
+        "width": 800,
+        "height": 597,
+        "bytes": 53862
+      },
+      {
+        "path": "assets/img/projects/prumo.webp",
+        "width": 1600,
+        "height": 1195,
+        "bytes": 136002
+      }
+    ]
+  },
+  {
+    "original": "assets/img/about/eraldo-perfil.png",
+    "bytes_before": 7558123,
+    "original_size": [
+      2108,
+      2048
+    ],
+    "outputs": [
+      {
+        "path": "assets/img/about/eraldo-perfil-small.webp",
+        "width": 640,
+        "height": 622,
+        "bytes": 24984
+      },
+      {
+        "path": "assets/img/about/eraldo-perfil.webp",
+        "width": 1200,
+        "height": 1166,
+        "bytes": 65618
+      }
+    ]
+  },
+  {
+    "original": "assets/img/brand/albano-tech-icon.png",
+    "bytes_before": 585222,
+    "outputs": [
+      {
+        "path": "assets/img/brand/albano-tech-icon.png",
+        "bytes": 41993
+      }
+    ]
+  },
+  {
+    "original": "assets/img/icons/whatsapp.png",
+    "bytes_before": 2592,
+    "outputs": [
+      {
+        "path": "assets/img/icons/whatsapp.png",
+        "bytes": 2592
+      }
+    ]
+  },
+  {
+    "original": "assets/img/icons/whatsapp_icone.png",
+    "bytes_before": 2595,
+    "outputs": [
+      {
+        "path": "assets/img/icons/whatsapp_icone.png",
+        "bytes": 2595
+      }
+    ]
+  },
+  {
+    "original": "assets/img/social-preview.png",
+    "bytes_before": 284017,
+    "outputs": [
+      {
+        "path": "assets/img/social-preview.png",
+        "bytes": 284017
+      }
+    ]
+  },
+  {
+    "original": "assets/img/brand/favicon.ico",
+    "bytes_before": 103831,
+    "outputs": [
+      {
+        "path": "assets/img/brand/favicon.ico",
+        "bytes": 103831
+      }
+    ]
+  }
+]

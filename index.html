@@ -14,14 +14,30 @@
   <meta property="og:image" content="https://albanoeraldo.github.io/albano-tech-v2/assets/img/social-preview.png">
   <meta property="og:image:alt" content="Albano Tech - sites, sistemas, automa&ccedil;&otilde;es e assist&ecirc;ncia t&eacute;cnica">
   <link rel="canonical" href="https://albanoeraldo.github.io/albano-tech-v2/">
-  <link rel="icon" href="assets/img/brand/favicon.ico?v=2" type="image/x-icon" sizes="any">
+  <link rel="icon" href="assets/img/brand/favicon.ico?v=3" type="image/x-icon" sizes="any">
 
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=20260916-opt1">
   <title>Albano Tech | Sites, automa&ccedil;&otilde;es e assist&ecirc;ncia t&eacute;cnica</title>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-  >
+  <!-- The carousel is below the fold; its stylesheet need not block the hero. -->
+  <link id="swiperStyles" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        media="print" onload="this.media='all';this.dataset.ready='true'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"></noscript>
+
+
+  <!-- Local fonts are unchanged. Do not remove assets/fonts from the existing project. -->
+  <link rel="preload" as="font" href="assets/fonts/orbitron-variable.ttf" type="font/ttf" crossorigin>
+  <link rel="preload" as="image" href="assets/img/hero/hero-programacao-mobile.webp"
+        type="image/webp" media="(max-width: 720px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/img/hero/hero-programacao.webp"
+        type="image/webp" media="(min-width: 721px)" fetchpriority="high">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="assets/js/config.js?v=20260916-opt1" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+  <script src="assets/js/app.js?v=20260916-opt1" defer></script>
 
 </head>
 <body>
@@ -49,13 +65,7 @@
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
       <a class="brand" href="#inicio" aria-label="Albano Tech - in&iacute;cio">
-        <img
-          src="assets/img/brand/albano-tech-icon.png"
-          width="56"
-          height="56"
-          alt=""
-          aria-hidden="true"
-        >
+        <img alt="" aria-hidden="true" decoding="async" height="56" src="assets/img/brand/albano-tech-icon.png" width="56"/>
         <span>albano<span class="brand-accent">tech</span><span class="brand-dot">.</span></span>
       </a>
       <nav id="mainNav" class="main-nav" aria-label="Navega&ccedil;&atilde;o principal">
@@ -74,31 +84,40 @@
 
   <main id="conteudo">
     <section class="hero hero--slideshow" id="inicio" aria-labelledby="heroTitle">
+      <!-- Only the first photograph loads with the page. Others are prepared one at a time. -->
       <div class="hero-slideshow" aria-hidden="true">
+        <div class="hero-slide is-active"
+             data-hero-desktop="assets/img/hero/hero-programacao.webp"
+             data-hero-mobile="assets/img/hero/hero-programacao-mobile.webp"
+             data-hero-width="1920"
+             data-hero-height="1080">
+          <picture>
+            <source media="(max-width: 720px)" srcset="assets/img/hero/hero-programacao-mobile.webp">
+            <img src="assets/img/hero/hero-programacao.webp" width="1920" height="1080"
+                 alt="" fetchpriority="high" decoding="async" loading="eager">
+          </picture>
+        </div>
+        <div class="hero-slide"
+             data-hero-desktop="assets/img/hero/hero-notebook.webp"
+             data-hero-mobile="assets/img/hero/hero-notebook-mobile.webp"
+             data-hero-width="1920"
+             data-hero-height="1080">
+        </div>
+        <div class="hero-slide"
+             data-hero-desktop="assets/img/hero/hero-pc.webp"
+             data-hero-mobile="assets/img/hero/hero-pc-mobile.webp"
+             data-hero-width="1920"
+             data-hero-height="1280">
+        </div>
+        <div class="hero-slide"
+             data-hero-desktop="assets/img/hero/hero-suporte.webp"
+             data-hero-mobile="assets/img/hero/hero-suporte-mobile.webp"
+             data-hero-width="1920"
+             data-hero-height="1280">
+        </div>
+      </div>
 
-  <div
-    class="hero-slide is-active"
-    style="background-image: url('assets/img/hero/hero-programacao.jpg');">
-  </div>
-
-  <div
-    class="hero-slide"
-    style="background-image: url('assets/img/hero/hero-notebook.jpg');">
-  </div>
-
-  <div
-    class="hero-slide"
-    style="background-image: url('assets/img/hero/hero-pc.jpg');">
-  </div>
-
-  <div
-    class="hero-slide"
-    style="background-image: url('assets/img/hero/hero-suporte.jpg');">
-  </div>
-
-</div>
-
-<div class="hero-slideshow-overlay" aria-hidden="true"></div>
+      <div class="hero-slideshow-overlay" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow hero-eyebrow"><span class="status-dot"></span> DO DIGITAL AO SEU COMPUTADOR</p>
@@ -112,14 +131,7 @@
    target="_blank"
    rel="noopener noreferrer">
 
-  <img
-    src="assets/img/icons/whatsapp_icone.png"
-    class="whatsapp-icon"
-    width="24"
-    height="24"
-    alt=""
-    aria-hidden="true"
-  >
+  <img alt="" aria-hidden="true" class="whatsapp-icon" decoding="async" height="24" src="assets/img/icons/whatsapp_icone.png" width="24"/>
 
   <span>Falar com Eraldo</span>
 
@@ -133,7 +145,7 @@
       </div>
       <div class="container hero-bottom"><span><svg class="icon"><use href="#i-pin"/></svg> <span data-location>Rio do Campo, SC</span> <span class="hero-divider"></span> Projetos digitais a dist&acirc;ncia</span><a href="#servicos" class="explore">EXPLORE AS POSSIBILIDADES <svg class="icon"><use href="#i-down"/></svg></a></div>
 
-      <div class="marquee" aria-label="Sites. Sistemas. Automa&ccedil;&otilde;es. Assist&ecirc;ncia t&eacute;cnica.">
+      <div class="marquee" role="group" aria-label="Sites. Sistemas. Automa&ccedil;&otilde;es. Assist&ecirc;ncia t&eacute;cnica.">
             <div class="marquee-track" aria-hidden="true">
               <div class="marquee-group"><span>SITES QUE CONECTAM</span><span class="marquee-star" aria-hidden="true"></span><span>SISTEMAS QUE SIMPLIFICAM</span><span class="marquee-star" aria-hidden="true"></span><span>AUTOMA&Ccedil;&Otilde;ES QUE AJUDAM</span><span class="marquee-star" aria-hidden="true"></span><span>TECNOLOGIA BEM CUIDADA</span><span class="marquee-star" aria-hidden="true"></span></div>
               <div class="marquee-group"><span>SITES QUE CONECTAM</span><span class="marquee-star" aria-hidden="true"></span><span>SISTEMAS QUE SIMPLIFICAM</span><span class="marquee-star" aria-hidden="true"></span><span>AUTOMA&Ccedil;&Otilde;ES QUE AJUDAM</span><span class="marquee-star" aria-hidden="true"></span><span>TECNOLOGIA BEM CUIDADA</span><span class="marquee-star" aria-hidden="true"></span></div>
@@ -149,13 +161,7 @@
         </div>
         <div class="service-groups">
           <article class="service-group" data-reveal>
-            <div class="service-visual"><img
-  src="assets/img/services/solucoes-digitais.jpg"
-  width="1000"
-  height="650"
-  loading="lazy"
-  alt="Ambiente de desenvolvimento de sites e sistemas"
-><span class="image-category"><svg class="icon"><use href="#i-code"/></svg> SOLU&Ccedil;&Otilde;ES DIGITAIS</span><span class="image-caption">Ilustra&ccedil;&atilde;o de interface</span></div>
+            <div class="service-visual"><img alt="Ambiente de desenvolvimento de sites e sistemas" decoding="async" height="1257" loading="lazy" sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1340px) calc((100vw - 96px) / 2), 605px" src="assets/img/services/solucoes-digitais.webp" srcset="assets/img/services/solucoes-digitais-small.webp 640w, assets/img/services/solucoes-digitais.webp 1200w" width="1200"/><span class="image-category"><svg class="icon"><use href="#i-code"/></svg> SOLU&Ccedil;&Otilde;ES DIGITAIS</span><span class="image-caption">Ilustra&ccedil;&atilde;o de interface</span></div>
             <div class="service-body"><div class="service-group-title"><h3>Seu neg&oacute;cio.<br>Novas possibilidades.</h3><span class="service-number">01</span></div><p>Presen&ccedil;a digital, organiza&ccedil;&atilde;o e menos tarefas repetitivas na sua rotina.</p>
               <a class="service-row" data-whatsapp="sites" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer"><span class="service-row-icon">
   <i data-lucide="monitor" aria-hidden="true"></i>
@@ -165,13 +171,7 @@
             </div>
           </article>
           <article class="service-group" data-reveal data-delay="100">
-            <div class="service-visual"><img
-  src="assets/img/services/assistencia-tecnica.jpg"
-  width="1000"
-  height="650"
-  loading="lazy"
-  alt="Computador em manutenção técnica"
-><span class="image-category"><svg class="icon"><use href="#i-chip"/></svg> ASSIST&Ecirc;NCIA T&Eacute;CNICA</span><span class="image-caption">Ilustra&ccedil;&atilde;o de hardware</span></div>
+            <div class="service-visual"><img alt="Computador em manutenção técnica" decoding="async" height="1200" loading="lazy" sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1340px) calc((100vw - 96px) / 2), 605px" src="assets/img/services/assistencia-tecnica.webp" srcset="assets/img/services/assistencia-tecnica-small.webp 640w, assets/img/services/assistencia-tecnica.webp 1200w" width="1200"/><span class="image-category"><svg class="icon"><use href="#i-chip"/></svg> ASSIST&Ecirc;NCIA T&Eacute;CNICA</span><span class="image-caption">Ilustra&ccedil;&atilde;o de hardware</span></div>
             <div class="service-body"><div class="service-group-title"><h3>Seu computador.<br>Pronto para acompanhar.</h3><span class="service-number">02</span></div><p>Cuidado com o equipamento que faz parte do seu trabalho e do seu dia a dia.</p>
               <a class="service-row" data-whatsapp="formatting" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer"><span class="service-row-icon"><i data-lucide="laptop" aria-hidden="true"></i></span><span><strong>Formata&ccedil;&atilde;o e configura&ccedil;&atilde;o</strong><small>Windows, drivers e configura&ccedil;&atilde;o inicial.</small></span><svg class="icon row-arrow"><use href="#i-arrow"/></svg></a>
               <a class="service-row" data-whatsapp="cleaning" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer"><span class="service-row-icon"><i data-lucide="wrench" aria-hidden="true"></i></span><span><strong>Limpeza e manuten&ccedil;&atilde;o</strong><small>Limpeza interna e avalia&ccedil;&atilde;o de temperatura.</small></span><svg class="icon row-arrow"><use href="#i-arrow"/></svg></a>
@@ -182,11 +182,7 @@
         <div class="service-footnote" data-reveal>
   <span>
 
-    <img
-      src="assets/img/icons/whatsapp.png"
-      class="whatsapp-inline-icon"
-      alt=""
-    >
+    <img alt="" class="whatsapp-inline-icon" decoding="async" src="assets/img/icons/whatsapp.png"/>
 
     Não sabe qual serviço precisa? Pode me contar o problema.
 
@@ -295,13 +291,7 @@
       aria-label="Conhecer o projeto Doce da Lu"
     >
 
-      <img
-        src="assets/img/projects/doce-da-lu.png"
-        width="1000"
-        height="720"
-        loading="lazy"
-        alt="Landing page desenvolvida para a Doce da Lu"
-      >
+      <img alt="Landing page desenvolvida para a Doce da Lu" decoding="async" height="876" loading="lazy" sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1340px) calc((100vw - 96px) / 3), 397px" src="assets/img/projects/doce-da-lu-card.webp" srcset="assets/img/projects/doce-da-lu-card.webp 800w, assets/img/projects/doce-da-lu.webp 1544w" width="1544"/>
 
 
 
@@ -376,13 +366,7 @@
       aria-label="Conhecer o projeto Prumo"
     >
 
-      <img
-        src="assets/img/projects/prumo.png"
-        width="1000"
-        height="720"
-        loading="lazy"
-        alt="Apresentação do aplicativo financeiro Prumo"
-      >
+      <img alt="Apresentação do aplicativo financeiro Prumo" decoding="async" height="1195" loading="lazy" sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1340px) calc((100vw - 96px) / 3), 397px" src="assets/img/projects/prumo-card.webp" srcset="assets/img/projects/prumo-card.webp 800w, assets/img/projects/prumo.webp 1600w" width="1600"/>
 
       <span class="project-image-arrow">
         <svg class="icon">
@@ -455,13 +439,7 @@
       aria-label="Conhecer o conceito de automação de processos"
     >
 
-      <img
-        src="assets/img/projects/automacao-processos.png"
-        width="1000"
-        height="720"
-        loading="lazy"
-        alt="Fluxo ilustrativo de automação de processos"
-      >
+      <img alt="Fluxo ilustrativo de automação de processos" decoding="async" height="1195" loading="lazy" sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1340px) calc((100vw - 96px) / 3), 397px" src="assets/img/projects/automacao-processos-card.webp" srcset="assets/img/projects/automacao-processos-card.webp 800w, assets/img/projects/automacao-processos.webp 1600w" width="1600"/>
 
       <span class="project-image-arrow">
         <svg class="icon">
@@ -637,6 +615,7 @@
 
         <span
           class="timeline-number"
+          role="img"
           aria-label="Etapa 1"
         >
           01
@@ -695,6 +674,7 @@
 
         <span
           class="timeline-number"
+          role="img"
           aria-label="Etapa 2"
         >
           02
@@ -754,6 +734,7 @@
 
         <span
           class="timeline-number"
+          role="img"
           aria-label="Etapa 3"
         >
           03
@@ -813,6 +794,7 @@
 
         <span
           class="timeline-number"
+          role="img"
           aria-label="Etapa 4"
         >
           04
@@ -888,7 +870,7 @@
 
           <div
             class="swiper testimonials-swiper"
-            aria-label="Depoimentos de clientes"
+            role="group" aria-label="Depoimentos de clientes"
           >
             <div class="swiper-wrapper">
 
@@ -899,7 +881,7 @@
 <div class="swiper-slide">
   <article class="testimonial-card">
 
-    <div class="testimonial-rating" aria-label="5 de 5 estrelas">
+    <div class="testimonial-rating" role="img" aria-label="5 de 5 estrelas">
       ★★★★★
     </div>
 
@@ -928,7 +910,7 @@
 <div class="swiper-slide">
   <article class="testimonial-card">
 
-    <div class="testimonial-rating" aria-label="5 de 5 estrelas">
+    <div class="testimonial-rating" role="img" aria-label="5 de 5 estrelas">
       ★★★★★
     </div>
 
@@ -956,7 +938,7 @@
 <div class="swiper-slide">
   <article class="testimonial-card">
 
-    <div class="testimonial-rating" aria-label="5 de 5 estrelas">
+    <div class="testimonial-rating" role="img" aria-label="5 de 5 estrelas">
       ★★★★★
     </div>
 
@@ -984,7 +966,7 @@
 <div class="swiper-slide">
   <article class="testimonial-card">
 
-    <div class="testimonial-rating" aria-label="5 de 5 estrelas">
+    <div class="testimonial-rating" role="img" aria-label="5 de 5 estrelas">
       ★★★★★
     </div>
 
@@ -1012,7 +994,7 @@
 <div class="swiper-slide">
   <article class="testimonial-card">
 
-    <div class="testimonial-rating" aria-label="5 de 5 estrelas">
+    <div class="testimonial-rating" role="img" aria-label="5 de 5 estrelas">
       ★★★★★
     </div>
 
@@ -1047,6 +1029,7 @@
 
         <div
           class="testimonial-pagination swiper-pagination"
+          role="group"
           aria-label="Selecionar depoimento"
         ></div>
 
@@ -1071,13 +1054,7 @@
 
     <div class="about-photo" data-reveal>
 
-      <img
-        src="assets/img/about/eraldo-perfil.png"
-        alt="Eraldo, responsável pela Albano Tech"
-        width="1200"
-        height="1200"
-        loading="lazy"
-      >
+      <img alt="Eraldo, responsável pela Albano Tech" decoding="async" height="1166" loading="lazy" sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1340px) 44vw, 552px" src="assets/img/about/eraldo-perfil.webp" srcset="assets/img/about/eraldo-perfil-small.webp 640w, assets/img/about/eraldo-perfil.webp 1200w" width="1200"/>
 
       <div class="about-photo-overlay">
 
@@ -1223,7 +1200,7 @@
     </section>
 
     <section class="section contact-section" id="contato" aria-labelledby="contactTitle">
-      <div class="container contact-grid"><div class="contact-copy" data-reveal><p class="eyebrow section-index">07 / VAMOS FAZER ACONTECER</p><h2 id="contactTitle">Qual &eacute; o seu<br>pr&oacute;ximo<br><span class="text-accent">passo?</span></h2><p>Uma ideia nova, uma tarefa repetitiva ou um computador pedindo ajuda. Pode me contar.</p><a class="contact-phone" data-whatsapp="general" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer"><img src="assets/img/icons/whatsapp.png" class="whatsapp-icon" width="26" height="26" alt="" aria-hidden="true"><span data-phone-label>(47) 98421-2803</span><svg class="icon"><use href="#i-arrow"/></svg></a><div class="contact-location"><svg class="icon"><use href="#i-pin"/></svg><span><strong data-location>Rio do Campo, SC</strong><br>Atendimento mediante combina&ccedil;&atilde;o.</span></div></div>
+      <div class="container contact-grid"><div class="contact-copy" data-reveal><p class="eyebrow section-index">07 / VAMOS FAZER ACONTECER</p><h2 id="contactTitle">Qual &eacute; o seu<br>pr&oacute;ximo<br><span class="text-accent">passo?</span></h2><p>Uma ideia nova, uma tarefa repetitiva ou um computador pedindo ajuda. Pode me contar.</p><a class="contact-phone" data-whatsapp="general" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer"><img alt="" aria-hidden="true" class="whatsapp-icon" decoding="async" height="26" src="assets/img/icons/whatsapp.png" width="26"/><span data-phone-label>(47) 98421-2803</span><svg class="icon"><use href="#i-arrow"/></svg></a><div class="contact-location"><svg class="icon"><use href="#i-pin"/></svg><span><strong data-location>Rio do Campo, SC</strong><br>Atendimento mediante combina&ccedil;&atilde;o.</span></div></div>
         <div class="contact-panel" data-reveal><span class="panel-tag"><span class="status-dot"></span> DIRETO PARA O MEU WHATSAPP</span><h3>Vamos come&ccedil;ar por aqui.</h3><p>Conte um pouco do que precisa. Sua mensagem fica pronta para voc&ecirc; revisar no WhatsApp.</p>
           <form id="quoteForm" class="quote-form" hidden>
             <div class="field"><label for="customerName">Como posso te chamar? <span>(opcional)</span></label><input id="customerName" name="name" type="text" autocomplete="given-name" placeholder="Seu primeiro nome" maxlength="70"></div>
@@ -1238,21 +1215,19 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="container"><div class="footer-top"><a class="brand" href="#inicio" aria-label="Albano Tech - voltar ao in&iacute;cio"><img src="assets/img/brand/albano-tech-icon.png" width="48" height="48" alt=""><span>albano<span class="brand-accent">tech</span><span class="brand-dot">.</span></span></a><p>Tecnologia para voc&ecirc;.<br>E para o que vem depois.</p><a href="#inicio" class="back-top">VOLTAR AO TOPO <svg class="icon"><use href="#i-arrow"/></svg></a></div><div class="footer-bottom"><span>&copy; <span id="currentYear">2026</span> Albano Tech. Todos os direitos reservados.</span><div class="footer-links"><button type="button" data-open-privacy>Privacidade</button><button type="button" id="motionToggle" aria-pressed="false">Reduzir movimentos</button><a href="https://github.com/albanoeraldo/albano-tech-v2" target="_blank" rel="noopener noreferrer">C&oacute;digo no GitHub <svg class="icon"><use href="#i-arrow"/></svg></a></div></div></div></footer>
-  <a class="floating-whatsapp" id="floatingWhatsapp" data-whatsapp="general" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer" aria-label="Conversar com a Albano Tech no WhatsApp"><span class="floating-label">Vamos conversar?</span><img src="assets/img/icons/whatsapp.png" class="whatsapp-icon" width="58" height="58" alt="" aria-hidden="true"></a>
+  <footer class="footer"><div class="container"><div class="footer-top"><a class="brand" href="#inicio" aria-label="Albano Tech - voltar ao in&iacute;cio"><img alt="" decoding="async" height="48" src="assets/img/brand/albano-tech-icon.png" width="48"/><span>albano<span class="brand-accent">tech</span><span class="brand-dot">.</span></span></a><p>Tecnologia para voc&ecirc;.<br>E para o que vem depois.</p><a href="#inicio" class="back-top">VOLTAR AO TOPO <svg class="icon"><use href="#i-arrow"/></svg></a></div><div class="footer-bottom"><span>&copy; <span id="currentYear">2026</span> Albano Tech. Todos os direitos reservados.</span><div class="footer-links"><button type="button" data-open-privacy>Privacidade</button><button type="button" id="motionToggle" aria-pressed="false">Reduzir movimentos</button><a href="https://github.com/albanoeraldo/albano-tech-v2" target="_blank" rel="noopener noreferrer">C&oacute;digo no GitHub <svg class="icon"><use href="#i-arrow"/></svg></a></div></div></div></footer>
+  <a class="floating-whatsapp" id="floatingWhatsapp" data-whatsapp="general" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer" aria-label="Conversar com a Albano Tech no WhatsApp"><span class="floating-label">Vamos conversar?</span><img alt="" aria-hidden="true" class="whatsapp-icon" decoding="async" height="58" src="assets/img/icons/whatsapp.png" width="58"/></a>
 
-  <dialog id="projectDialog" class="project-dialog" aria-labelledby="projectDialogTitle"><button type="button" class="dialog-close" data-close-dialog aria-label="Fechar detalhes do projeto"><svg class="icon"><use href="#i-close"/></svg></button><div class="dialog-cover"><img id="projectDialogImage" src="assets/img/projects/doce-da-lu.png" width="1000" height="720" alt=""></div><div class="dialog-body"><span id="projectDialogTag" class="dialog-tag"></span><h2 id="projectDialogTitle"></h2><p id="projectDialogDescription" class="dialog-description"></p><div id="projectDialogSections" class="dialog-sections"></div><div class="dialog-actions"><a id="projectDialogWhatsapp" class="button button-primary" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer">Conversar sobre algo parecido <svg class="icon"><use href="#i-arrow"/></svg></a><a id="projectDialogExternal" class="text-link" href="https://albanoeraldo.github.io/albano-tech-v2/" target="_blank" rel="noopener noreferrer">Visitar site publicado <svg class="icon"><use href="#i-arrow"/></svg></a></div></div></dialog>
+  <dialog id="projectDialog" class="project-dialog" aria-labelledby="projectDialogTitle"><button type="button" class="dialog-close" data-close-dialog aria-label="Fechar detalhes do projeto"><svg class="icon"><use href="#i-close"/></svg></button><div class="dialog-cover"><img alt="" decoding="async" height="876" id="projectDialogImage" loading="lazy" src="assets/img/projects/doce-da-lu.webp" width="1544"/></div><div class="dialog-body"><span id="projectDialogTag" class="dialog-tag"></span><h2 id="projectDialogTitle"></h2><p id="projectDialogDescription" class="dialog-description"></p><div id="projectDialogSections" class="dialog-sections"></div><div class="dialog-actions"><a id="projectDialogWhatsapp" class="button button-primary" href="https://wa.me/5547984212803" target="_blank" rel="noopener noreferrer">Conversar sobre algo parecido <svg class="icon"><use href="#i-arrow"/></svg></a><a id="projectDialogExternal" class="text-link" href="https://albanoeraldo.github.io/albano-tech-v2/" target="_blank" rel="noopener noreferrer">Visitar site publicado <svg class="icon"><use href="#i-arrow"/></svg></a></div></div></dialog>
 
   <dialog id="privacyDialog" class="privacy-dialog" aria-labelledby="privacyTitle"><button type="button" class="dialog-close" data-close-dialog aria-label="Fechar informa&ccedil;&otilde;es de privacidade"><svg class="icon"><use href="#i-close"/></svg></button><div class="dialog-body"><p class="eyebrow">SEUS DADOS</p><h2 id="privacyTitle">Privacidade,<br>sem complicar.</h2><p>Este site n&atilde;o possui banco de dados de visitantes, ferramentas de an&aacute;lise, pixels publicit&aacute;rios ou cookies pr&oacute;prios.</p><p>Os campos do pedido de or&ccedil;amento s&atilde;o usados no seu navegador para montar um link de conversa. Ao continuar, o texto &eacute; inclu&iacute;do no endere&ccedil;o aberto no WhatsApp; por isso, n&atilde;o inclua senhas, documentos ou dados sens&iacute;veis. A mensagem s&oacute; &eacute; enviada ao destinat&aacute;rio quando voc&ecirc; confirmar no WhatsApp.</p><p>A hospedagem pode registrar dados t&eacute;cnicos de acesso. O WhatsApp e o GitHub possuem suas pr&oacute;prias pol&iacute;ticas de privacidade e passam a tratar dados quando voc&ecirc; acessa esses servi&ccedil;os.</p><p>D&uacute;vidas sobre o atendimento podem ser tratadas com Eraldo no WhatsApp informado nesta p&aacute;gina.</p><button type="button" class="button button-primary" data-close-dialog>Entendi <svg class="icon"><use href="#i-check"/></svg></button></div></dialog>
   <noscript><div class="noscript-note">O JavaScript est&aacute; desativado. Os servi&ccedil;os, perguntas e links de WhatsApp continuam dispon&iacute;veis; filtros, janelas de projeto e montagem de mensagem precisam de JavaScript.</div></noscript>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="assets/js/config.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-  <script src="assets/js/app.js"></script>
-  <script>
-    lucide.createIcons();
-  </script>
+  
+  
+  
+  
+  
+  
+  
 </body>
 </html>

@@ -1,10 +1,14 @@
 /**
- * ALBANO TECH - progressively enhanced, dependency-free interactions.
+ * ALBANO TECH - progressively enhanced interactions with optional animation libraries.
  * All content, FAQ and contact anchors are usable without JavaScript.
  * Runs from file:// as well as a static HTTP host such as GitHub Pages.
  */
 (() => {
   'use strict';
+
+  // Prevent duplicate listeners if app.js is included twice by accident.
+  if (window.__ALBANO_APP_READY__) return;
+  window.__ALBANO_APP_READY__ = true;
 
   const config = window.ALBANO_CONFIG;
   const root = document.documentElement;
@@ -15,6 +19,10 @@
   let manuallyReduced = false;
   let reducedMotion = motionQuery.matches;
   let revealObserver;
+
+  function setupIcons() {
+    if (window.lucide?.createIcons) window.lucide.createIcons();
+  }
 
   // Keep the static links usable even if configuration is missing or invalid.
   const phoneIsValid = config && /^[1-9]\d{10,14}$/.test(config.whatsappNumber);
@@ -96,6 +104,7 @@
     function updateMotion() {
       reducedMotion = motionQuery.matches || manuallyReduced;
       root.classList.toggle('no-motion', reducedMotion);
+      document.dispatchEvent(new CustomEvent('albano:motionchange', { detail: { reducedMotion } }));
       button?.setAttribute('aria-pressed', String(reducedMotion));
       if (button) {
         button.disabled = motionQuery.matches;
@@ -436,7 +445,14 @@ function setupProcessAnimations() {
   function setupTestimonials() {
     const container = $('.testimonials-swiper');
 
-    if (!container) return;
+    if (!container || container.swiper) return;
+
+    // Apply the optional stylesheet before Swiper measures the slides.
+    const styles = $('#swiperStyles');
+    if (styles && styles.dataset.ready !== 'true') {
+      styles.addEventListener('load', setupTestimonials, { once: true });
+      return;
+    }
 
     if (!window.Swiper) {
       console.warn('Albano Tech: Swiper não carregado.');
@@ -575,6 +591,8 @@ function setupProcessAnimations() {
       const image = $('#projectDialogImage');
       image.src = project.image;
       image.alt = project.imageAlt;
+      if (project.imageWidth) image.width = project.imageWidth;
+      if (project.imageHeight) image.height = project.imageHeight;
       const sections = $('#projectDialogSections');
       sections.replaceChildren();
       project.sections.forEach(([title, description]) => {
@@ -635,33 +653,142 @@ function setupProcessAnimations() {
       const url = whatsappUrl(lines.join('\n'));
       // Called synchronously from the user's action. No requests to a backend.
       // No confirmation of sending: the visitor must review and send in WhatsApp.
-      // A normal fallback link stays visible if the browser blocks the new tab.
+      // Other static WhatsApp links remain available if the browser blocks pop-ups.
       window.open(url, '_blank', 'noopener,noreferrer');
     });
   }
 
+  /**
+   * First image is eager in HTML. Remaining images load one at a time,
+   * after the page load, with low priority. No blank frame on a slow network.
+   */
   function setupHeroSlideshow() {
-    const slides = $$('.hero-slide');
-    if (slides.length <= 1) return;
+    const hero = $('#inicio');
+    const slides = $$('.hero-slide', hero || document);
+    if (!hero || slides.length <= 1) return;
 
-    let currentSlide = slides.findIndex((slide) => slide.classList.contains('is-active'));
-    if (currentSlide < 0) {
-      currentSlide = 0;
-      slides[0].classList.add('is-active');
+    const interval = 6000;
+    const loaded = new WeakMap();
+    let current = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
+    let timer = 0;
+    let idleHandle = 0;
+    let busy = false;
+    let ready = false;
+    let inView = hero.getBoundingClientRect().bottom > 0 && hero.getBoundingClientRect().top < window.innerHeight;
+    const canRun = () => ready && inView && !document.hidden && !reducedMotion;
+    slides[current].classList.add('is-active');
+
+    function loadSlide(slide) {
+      if (loaded.has(slide)) return loaded.get(slide);
+      const task = new Promise((resolve) => {
+        let image = $('img', slide);
+        if (!image) {
+          const picture = document.createElement('picture');
+          const source = document.createElement('source');
+          source.media = '(max-width: 720px)';
+          source.srcset = slide.dataset.heroMobile;
+          image = new Image();
+          image.alt = '';
+          image.width = Number(slide.dataset.heroWidth) || 1920;
+          image.height = Number(slide.dataset.heroHeight) || 1080;
+          image.decoding = 'async';
+          image.fetchPriority = 'low';
+          picture.append(source, image);
+          slide.append(picture);
+          image.src = slide.dataset.heroDesktop;
+        }
+        let finished = false;
+        const finish = async () => {
+          if (finished) return;
+          finished = true;
+          image.removeEventListener('load', finish);
+          image.removeEventListener('error', finish);
+          if (!image.naturalWidth) { resolve(false); return; }
+          try { await image.decode(); } catch (_) { /* onload already confirmed pixels. */ }
+          resolve(image.naturalWidth > 0);
+        };
+        if (image.complete) finish();
+        else {
+          image.addEventListener('load', finish, { once: true });
+          image.addEventListener('error', finish, { once: true });
+        }
+      });
+      loaded.set(slide, task);
+      return task;
     }
 
-    window.setInterval(() => {
-      // Respeita a preferência de movimento reduzido e evita trabalho em aba oculta.
-      if (reducedMotion || document.hidden) return;
-
-      slides[currentSlide].classList.remove('is-active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('is-active');
-    }, 6000);
+    function cancelIdle() {
+      if (!idleHandle) return;
+      if ('cancelIdleCallback' in window) window.cancelIdleCallback(idleHandle);
+      else window.clearTimeout(idleHandle);
+      idleHandle = 0;
+    }
+    function prepareNext() {
+      cancelIdle();
+      const work = () => {
+        idleHandle = 0;
+        if (canRun()) loadSlide(slides[(current + 1) % slides.length]);
+      };
+      idleHandle = 'requestIdleCallback' in window
+        ? window.requestIdleCallback(work, { timeout: 1800 })
+        : window.setTimeout(work, 400);
+    }
+    function stop() {
+      window.clearTimeout(timer);
+      timer = 0;
+      cancelIdle();
+    }
+    function schedule() {
+      stop();
+      if (!canRun() || busy) return;
+      prepareNext();
+      timer = window.setTimeout(advance, interval);
+    }
+    async function advance() {
+      timer = 0;
+      if (!canRun() || busy) return;
+      busy = true;
+      const next = (current + 1) % slides.length;
+      try {
+        const ok = await loadSlide(slides[next]);
+        if (ok && canRun()) {
+          slides[current].classList.remove('is-active');
+          slides[next].classList.add('is-active');
+          current = next;
+        } else if (!ok) {
+          // Retry later; leave the currently loaded image visible.
+          loaded.delete(slides[next]);
+        }
+      } finally {
+        busy = false;
+        schedule();
+      }
+    }
+    async function start() {
+      if (ready) return;
+      await loadSlide(slides[current]);
+      ready = true;
+      schedule();
+    }
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        inView = entries[0].isIntersecting;
+        schedule();
+      }, { threshold: 0 });
+      observer.observe(hero);
+    }
+    document.addEventListener('visibilitychange', schedule);
+    document.addEventListener('albano:motionchange', schedule);
+    window.addEventListener('pagehide', stop);
+    window.addEventListener('pageshow', schedule);
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
   }
+
 
   // Modules remain isolated: one optional enhancement failing does not stop links.
   [
+  setupIcons,
   setupContactLinks,
   setupNavigation,
   setupMotion,
